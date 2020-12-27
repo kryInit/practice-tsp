@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "../random/xor_shift.h"
-#include "../time/time_manager.hpp"
+#include "../../random/xor_shift.h"
+#include "../../time/time_manager.hpp"
 #include "simple_solver.h"
 using namespace std;
 
@@ -9,8 +9,8 @@ using namespace std;
 
 extern Vec2 cities_coord[CITY_NUM];
 
-void simple_solver(int path[CITY_NUM]) {
-    time_manager tm(3000);
+void simple_solver(int path[CITY_NUM], const unsigned int ms_time_limit) {
+    time_manager tm(ms_time_limit);
     double best_total_dist = calc_total_dist(path);
     int loop_count = 0;
     while(tm.is_within_time_limit()) {

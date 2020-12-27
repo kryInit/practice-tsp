@@ -1,0 +1,3 @@
+add_subdirectory(2-opt)
+add_subdirectory(preprocessing)
+add_subdirectory(simple_solver)

@@ -12,11 +12,10 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
 add_subdirectory(random)
 add_subdirectory(utility)
-add_subdirectory(simple_solver)
-add_subdirectory(preprocessing)
+add_subdirectory(solvers)
 
 add_executable(route_builder simple_tsp.cpp)
-target_link_libraries(route_builder xor_shift utility simple_solver simple_preprocessing)
+target_link_libraries(route_builder xor_shift utility simple_solver simple_preprocessing 2-opt)
 
 #[[
 set_target_properties( route_builder

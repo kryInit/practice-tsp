@@ -1,21 +1,28 @@
 /* * * *
  * Todo
- * [] 2-opt
+ * [x] 2-opt
  * [] 3-opt
    [] n-opt                *
    [] simulated annealing  *
    [] optuna               *
                      * * * */
 
-// default: 2.64764e+05
-// default + simple_preprocessing: 1.56876e+05
-// simple_solver: 4.15114e+04
-// simple_solver + simple_preprocessing: 3.63035e+04
+// default                                     : 2.64764e+05
+// default + simple_preprocessing              : 1.56876e+05
+// simple_solver                               : 4.15114e+04
+// simple_solver + simple_preprocessing        : 3.63035e+04
+// 2-opt                                       : 1.92137e+04
+// 2-opt + simple_preprocessing                : 1.92300e+04
+// simple_solver(1sec) + 2-opt(2sec) + sp      : 1.89941e+04
+// simple_solver(1.5sec) + 2-opt(1.5sec) + sp  : 1.90244e+04
+// simple_solver(2sec) + 2-opt(1sec) + sp      : 1.88177e+04
 
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
-#include "simple_solver/simple_solver.h"
 #include "utility/utility.h"
+#include "solvers/simple_solver/simple_solver.h"
+#include "solvers/2-opt/2-opt.h"
+#include "solvers/preprocessing/simple_preprocessing.h"
 using namespace std;
 
 #define rep(i,n) for(int i=0; i<(n); ++i)
@@ -23,23 +30,15 @@ using namespace std;
 void initialize();
 void finalize();
 
-void preprocessing();
-
 Vec2 cities_coord[CITY_NUM]={};
 int path[CITY_NUM]={};
 
 int main() {
     initialize();
-    preprocessing();
-    simple_solver(path);
+    simple_preprocessing(path);
+    simple_solver(path, 2000);
+    simple_solver_using_2_opt(path, 1000);
     finalize();
-}
-
-void preprocessing() {
-    vector<pair<pair<int,int>, int>> v;
-    rep(i,CITY_NUM) v.emplace_back(make_pair(cities_coord[i].x, cities_coord[i].y), i);
-    sort(v.begin(), v.end());
-    rep(i,CITY_NUM) path[i] = v[i].second;
 }
 
 void make_city() {
@@ -56,7 +55,17 @@ void initialize() {
     rep(i,CITY_NUM) path[i] = i;
 }
 
+void check() {
+    int cnt[CITY_NUM]={};
+    rep(i,CITY_NUM) cnt[path[i]]++;
+    rep(i,CITY_NUM) if (cnt[i] != 1) {
+        cerr << "cities are duplicated" << endl;
+        exit(1);
+    }
+}
+
 void finalize() {
+    check();
     cout << "total dist: " << scientific << setprecision(5) << calc_total_dist(path) << endl;
 }
 
