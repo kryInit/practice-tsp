@@ -1,0 +1,1 @@
+add_library(xor_shift xor_shift.cpp)

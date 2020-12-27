@@ -1,0 +1,1 @@
+add_library(simple_solver simple_solver.cpp)

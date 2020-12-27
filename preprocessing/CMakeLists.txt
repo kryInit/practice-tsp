@@ -1,0 +1,1 @@
+add_library(simple_preprocessing simple_preprocessing.cpp)
