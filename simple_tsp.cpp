@@ -1,8 +1,8 @@
 /* * * *
  * Todo
  * [x] 2-opt
- * [] 3-opt
-   [] n-opt
+ * [] 3-opt (実装難しすぎ)
+   [] n-opt (一般化できねぇ、実装つらい)
    [] bitDP                *
    [] simulated annealing  *
    [] optuna               *
@@ -22,10 +22,8 @@
 
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
-#include "utility/utility.h"
-#include "solvers/simple_solver/simple_solver.h"
-#include "solvers/2-opt/2-opt.h"
-#include "solvers/preprocessing/simple_preprocessing.h"
+#include "utility/utilities.h"
+#include "solvers/solvers.h"
 using namespace std;
 
 #define rep(i,n) for(int i=0; i<(n); ++i)

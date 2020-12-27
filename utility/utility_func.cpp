@@ -1,13 +1,16 @@
+#ifndef NDEBUG
 #include <iostream>
+#endif
+
 #include <cmath>
-#include "utility.h"
+#include "utility_func.h"
 using namespace std;
 
 #define rep(i,n) for(int i=0; i<(n); ++i)
 
 extern Vec2 cities_coord[CITY_NUM];
 
-int square_dist(Vec2 a, Vec2 b) {
+unsigned int square_dist(Vec2 a, Vec2 b) {
     int dx = a.x - b.x;
     int dy = a.y - b.y;
     return dx*dx + dy*dy;
