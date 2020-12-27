@@ -2,7 +2,8 @@
  * Todo
  * [x] 2-opt
  * [] 3-opt
-   [] n-opt                *
+   [] n-opt
+   [] bitDP                *
    [] simulated annealing  *
    [] optuna               *
                      * * * */
@@ -16,6 +17,8 @@
 // simple_solver(1sec) + 2-opt(2sec) + sp      : 1.89941e+04
 // simple_solver(1.5sec) + 2-opt(1.5sec) + sp  : 1.90244e+04
 // simple_solver(2sec) + 2-opt(1sec) + sp      : 1.88177e+04
+// -- upgrade simple_solver --
+// simple_solver(2sec) + 2-opt(1sec) + sp      : 1.84935e+04
 
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
