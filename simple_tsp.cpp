@@ -3,10 +3,10 @@
  * [x] 2-opt
  * [] 3-opt (実装難しすぎ)
    [] n-opt (一般化できねぇ、実装つらい)
-   [] bitDP                *
-   [] simulated annealing  *
-   [] optuna               *
-                     * * * */
+   [] bitDP                          *
+   [x] simulated annealing           *
+   [] optuna                         *
+                               * * * */
 
 // default                                     : 2.64764e+05
 // default + simple_preprocessing              : 1.56876e+05
@@ -19,6 +19,7 @@
 // simple_solver(2sec) + 2-opt(1sec) + sp      : 1.88177e+04
 // -- upgrade simple_solver --
 // simple_solver(2sec) + 2-opt(1sec) + sp      : 1.84935e+04
+// simulated_annealing + 2-opt                 : 1.72736e+04
 
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
@@ -36,9 +37,14 @@ int path[CITY_NUM]={};
 
 int main() {
     initialize();
-    simple_preprocessing(path);
-    simple_solver(path, 2000);
-    simple_solver_using_2_opt(path, 1000);
+//    simple_preprocessing(path);
+//    simple_solver(path, 1000);
+//    simple_solver_using_2_opt(path, 1000);
+    ParametersForSA params;
+    params.ms_time_limit = 3000;
+    params.TEMP_RADIX = 100;
+    params.PROBABILITY_COEF = 0.0001;
+    SA_TwoOpt(path, params).simulate(path);
     finalize();
 }
 

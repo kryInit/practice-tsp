@@ -10,6 +10,7 @@ struct Node {
 };
 
 class TwoOpt {
+protected:
     Node nodes[CITY_NUM];
     int calc_diff_sdist(unsigned int a, unsigned int c);
     void update_nodes(unsigned int a, unsigned int c);
