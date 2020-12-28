@@ -4,7 +4,7 @@
  * [] 3-opt (実装難しすぎ)
    [] n-opt (一般化できねぇ、実装つらい)
    [x] nearest neighbor algorithm
-   [] bitDP                          *
+   [x] bitDP                         *
    [x] simulated annealing           *
    [x] optuna                        *
                                * * * */
@@ -17,7 +17,14 @@
  *
  * -- preprocessingとsimulated annealingについて
  * simulated annealingは局所解に陥らないように動くので、preprocessingはあまり意味をなさないかもしれない。
- * */
+ *
+ * -- bitDPについて
+ * 書いて試したけど、高々数十程度の改善にしかならない。ただ、その程度ならば大体毎回改善している。
+ *
+ * -- 焼き鈍しのbest_nodesのメモについて
+ * 焼き鈍しの思想としてはメモは不必要というか作らなくても良いようなパラメータを探せと言われてしまうかもしれないけど
+ * メモした方が安定するからメモします。
+* */
 
 // default                                     : 2.64764e+05
 // simple_preprocessing                        : 1.56876e+05
@@ -36,7 +43,6 @@
 // only nearest_neighbor                       : 9.37335e+04
 
 
-
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
 #include "utility/utilities.h"
@@ -52,17 +58,22 @@ Vec2 cities_coord[CITY_NUM]={};
 int path[CITY_NUM]={};
 
 int main(int argc, char *argv[]) {
+    stopwatch sw; sw.start();
     initialize();
 //    preprocessing_with_nearest_neighbor(path);
 //    simple_preprocessing(path);
 //    simple_solver(path, 3000);
 //    simple_solver_using_2_opt(path, 3000);
     ParametersForSA params;
-    params.ms_time_limit = 30000;
+    params.ms_time_limit = 3000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
     SA_TwoOpt(path, params).simulate(path);
+    final_optimize_with_bitDP(path, 10, 1);
     finalize();
+    sw.print_us();
+    sw.print_ms();
+    sw.print_sec();
 }
 
 void make_city() {

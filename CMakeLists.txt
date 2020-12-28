@@ -15,7 +15,7 @@ add_subdirectory(utility)
 add_subdirectory(solvers)
 
 add_executable(route_builder simple_tsp.cpp)
-target_link_libraries(route_builder xor_shift utility simple_solver simple_preprocessing 2-opt)
+target_link_libraries(route_builder xor_shift utility simple_solver simple_preprocessing 2-opt bitDP)
 
 #[[
 set_target_properties( route_builder
