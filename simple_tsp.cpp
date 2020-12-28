@@ -3,20 +3,24 @@
  * [x] 2-opt
  * [] 3-opt (実装難しすぎ)
    [] n-opt (一般化できねぇ、実装つらい)
-   [] nearest neighbor algorithm
+   [x] nearest neighbor algorithm
    [] bitDP                          *
    [x] simulated annealing           *
-   [x] optuna                         *
+   [x] optuna                        *
                                * * * */
 /*
+ * -- optunaについて
  * 焼き鈍しの温度関数に経過時間を使っている以上、乱数の初期化シードを固定しても出力結果は一定にならない。
  * optunaで最適化した際のminimum total distは17042.31804541591だが、そのパラメータで再度実行しても再現性はない
  * 誤差は数百くらいあるため、ぶっちゃけ1e4も回す必要はなかった。人間が適当に決めてもそれなりの値は出てたと思う。
  * best parameters:  {'temp radix': 233.55017584597834, 'probability coefficient': 9.710768225026422e-05}
+ *
+ * -- preprocessingとsimulated annealingについて
+ * simulated annealingは局所解に陥らないように動くので、preprocessingはあまり意味をなさないかもしれない。
  * */
 
 // default                                     : 2.64764e+05
-// default + simple_preprocessing              : 1.56876e+05
+// simple_preprocessing                        : 1.56876e+05
 // simple_solver                               : 4.15114e+04
 // simple_solver + simple_preprocessing        : 3.63035e+04
 // 2-opt                                       : 1.92137e+04
@@ -29,7 +33,7 @@
 // simulated_annealing + 2-opt                 : 1.72736e+04
 // -- tuning with optuna (5077th out of 1e4 times, about 8h20m) --
 // simulated_annealing + 2-opt                 : 1.71558e+04
-
+// only nearest_neighbor                       : 9.37335e+04
 
 
 
@@ -49,11 +53,12 @@ int path[CITY_NUM]={};
 
 int main(int argc, char *argv[]) {
     initialize();
+//    preprocessing_with_nearest_neighbor(path);
 //    simple_preprocessing(path);
-//    simple_solver(path, 1000);
-//    simple_solver_using_2_opt(path, 1000);
+//    simple_solver(path, 3000);
+//    simple_solver_using_2_opt(path, 3000);
     ParametersForSA params;
-    params.ms_time_limit = 3000;
+    params.ms_time_limit = 30000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
     SA_TwoOpt(path, params).simulate(path);
