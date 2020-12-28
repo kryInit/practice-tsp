@@ -15,14 +15,16 @@ struct ParametersForSA {
 };
 
 class SimulatedAnnealing {
-protected:
     const unsigned int ms_time_limit;
     const unsigned int TEMP_RADIX;
     const double PROBABILITY_COEF;
     time_manager tm;
     double tempreture();
     double probability(double diff, double t);
+
+protected:
     bool permit_transition(double diff);
+    bool permit_continuation();
 
 public:
     explicit SimulatedAnnealing(ParametersForSA params)
@@ -43,6 +45,10 @@ inline double SimulatedAnnealing::probability(double diff, double t) {
 
 inline bool SimulatedAnnealing::permit_transition(double diff) {
     return probability(diff, tempreture()) > ((double)rand_uint() / (double)UINT_MAX);
+}
+
+inline bool SimulatedAnnealing::permit_continuation() {
+    return tm.is_within_time_limit();
 }
 
 #endif

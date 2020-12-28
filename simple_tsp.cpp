@@ -3,10 +3,17 @@
  * [x] 2-opt
  * [] 3-opt (実装難しすぎ)
    [] n-opt (一般化できねぇ、実装つらい)
+   [] nearest neighbor algorithm
    [] bitDP                          *
    [x] simulated annealing           *
-   [] optuna                         *
+   [x] optuna                         *
                                * * * */
+/*
+ * 焼き鈍しの温度関数に経過時間を使っている以上、乱数の初期化シードを固定しても出力結果は一定にならない。
+ * optunaで最適化した際のminimum total distは17042.31804541591だが、そのパラメータで再度実行しても再現性はない
+ * 誤差は数百くらいあるため、ぶっちゃけ1e4も回す必要はなかった。人間が適当に決めてもそれなりの値は出てたと思う。
+ * best parameters:  {'temp radix': 233.55017584597834, 'probability coefficient': 9.710768225026422e-05}
+ * */
 
 // default                                     : 2.64764e+05
 // default + simple_preprocessing              : 1.56876e+05
@@ -20,6 +27,11 @@
 // -- upgrade simple_solver --
 // simple_solver(2sec) + 2-opt(1sec) + sp      : 1.84935e+04
 // simulated_annealing + 2-opt                 : 1.72736e+04
+// -- tuning with optuna (5077th out of 1e4 times, about 8h20m) --
+// simulated_annealing + 2-opt                 : 1.71558e+04
+
+
+
 
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
@@ -35,15 +47,15 @@ void finalize();
 Vec2 cities_coord[CITY_NUM]={};
 int path[CITY_NUM]={};
 
-int main() {
+int main(int argc, char *argv[]) {
     initialize();
 //    simple_preprocessing(path);
 //    simple_solver(path, 1000);
 //    simple_solver_using_2_opt(path, 1000);
     ParametersForSA params;
     params.ms_time_limit = 3000;
-    params.TEMP_RADIX = 100;
-    params.PROBABILITY_COEF = 0.0001;
+    params.TEMP_RADIX = 233;
+    params.PROBABILITY_COEF = 9.71e-5;
     SA_TwoOpt(path, params).simulate(path);
     finalize();
 }

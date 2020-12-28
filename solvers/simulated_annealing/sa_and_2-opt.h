@@ -6,7 +6,7 @@
 #include "../2-opt/2-opt.h"
 #include "simulated_annealing_template.h"
 
-class SA_TwoOpt : public SimulatedAnnealing, public TwoOpt {
+class SA_TwoOpt : private SimulatedAnnealing, private TwoOpt {
 public:
     SA_TwoOpt(int path[CITY_NUM], ParametersForSA params)
         : SimulatedAnnealing(params)
@@ -14,7 +14,7 @@ public:
 
     void simulate(int path[CITY_NUM]) {
         int loop_count = 0;
-        while(tm.is_within_time_limit()) {
+        while(permit_continuation()) {
             loop_count++;
             unsigned int a = rand_range(CITY_NUM), c = rand_range(CITY_NUM);
             while(a == c) { c = rand_range(CITY_NUM); }
