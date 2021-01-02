@@ -1,5 +1,4 @@
-#ifndef STOPWATCH_HPP
-#define STOPWATCH_HPP
+#pragma once
 
 #include <iostream>
 #include <chrono>
@@ -73,5 +72,3 @@ inline void stopwatch::print_ms() {
 inline void stopwatch::print_us() {
     printf("%lu [us]\n", get_us());
 }
-
-#endif

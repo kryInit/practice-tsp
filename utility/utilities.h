@@ -1,8 +1,6 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#pragma once
 
 #include "Vec2.h"
+#include "Nodes.h"
 #include "constant.h"
 #include "utility_func.h"
-
-#endif

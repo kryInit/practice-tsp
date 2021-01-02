@@ -1,5 +1,4 @@
-#ifndef VEC2_H
-#define VEC2_H
+#pragma once
 
 #include <iostream>
 
@@ -25,5 +24,3 @@ struct Vec2 {
         return out;
     }
 };
-
-#endif

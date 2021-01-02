@@ -1,0 +1,3 @@
+add_subdirectory(processors)
+add_subdirectory(preprocessors)
+add_subdirectory(postprocessors)

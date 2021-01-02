@@ -1,1 +1,0 @@
-add_library(simple_preprocessing simple_preprocessing.cpp nearest_neighbor.cpp)

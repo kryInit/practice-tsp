@@ -46,7 +46,7 @@
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
 #include "utility/utilities.h"
-#include "solvers/solvers.h"
+#include "optimizers/optimizers.h"
 using namespace std;
 
 #define rep(i,n) for(int i=0; i<(n); ++i)
@@ -60,16 +60,16 @@ int path[CITY_NUM]={};
 int main(int argc, char *argv[]) {
     stopwatch sw; sw.start();
     initialize();
-//    preprocessing_with_nearest_neighbor(path);
-//    simple_preprocessing(path);
-//    simple_solver(path, 3000);
-//    simple_solver_using_2_opt(path, 3000);
+//    nearest_neighbor(path);
+//    xy_sort(path);
+//    swap(path, 3000);
+//    two_opt(path, 3000);
     ParametersForSA params;
     params.ms_time_limit = 3000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
     SA_TwoOpt(path, params).simulate(path);
-    final_optimize_with_bitDP(path, 10, 1);
+    bitDP(path, 10, 1);
     finalize();
     sw.print_us();
     sw.print_ms();

@@ -1,5 +1,4 @@
-#ifndef TIME_MANAGER
-#define TIME_MANAGER
+#pragma once
 
 #include <iostream>
 #include "stopwatch.hpp"
@@ -18,5 +17,3 @@ inline time_manager::time_manager(unsigned long _ms_time_limit) : ms_time_limit(
 inline bool time_manager::is_within_time_limit() {
     return get_ms() < ms_time_limit;
 }
-
-#endif
