@@ -60,8 +60,9 @@ int path[CITY_NUM]={};
 int main(int argc, char *argv[]) {
     stopwatch sw; sw.start();
     initialize();
-//    nearest_neighbor(path);
-//    xy_sort(path);
+
+    Preprocessors preprocessors = Preprocessors::yx_sort_preprocess() + Preprocessors::xy_sort_preprocess();
+    preprocessors += Preprocessors::nearest_neighbor_preprocess();
 
     SimulatedAnnealing::ParametersForSA params;
     params.ms_time_limit = 3000;
@@ -71,6 +72,8 @@ int main(int argc, char *argv[]) {
     Processors processors;
     processors = Processors::random_swap_process(1000) + Processors::two_opt_process(2000);
     processors += Processors::SA_two_opt_process(params);
+
+    preprocessors.preprocessing(path, true);
     processors.processing(path, true);
 
     bitDP(path, 10, 1);
