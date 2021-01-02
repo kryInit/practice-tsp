@@ -7,7 +7,7 @@
 
 class SA_TwoOpt : private SimulatedAnnealing, private TwoOpt {
 public:
-    SA_TwoOpt(int path[CITY_NUM], ParametersForSA params)
+    SA_TwoOpt(int path[CITY_NUM], Parameters params)
         : SimulatedAnnealing(params)
         , TwoOpt(path) {}
 

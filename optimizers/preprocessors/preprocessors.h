@@ -1,9 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "nearest_neighbor/nearest_neighbor.h"
-#include "sort/xy_sort/xy_sort.h"
-#include "sort/yx_sort/yx_sort.h"
+#include "utility/utilities.h"
 
 class Preprocessors {
     static constexpr unsigned int NONE_MODE = -1;
@@ -15,7 +13,7 @@ class Preprocessors {
         unsigned int mode;
 
         Parameters() : mode(NONE_MODE) {}
-        Parameters(unsigned int _mode) : mode(_mode) {}
+        explicit Parameters(unsigned int _mode) : mode(_mode) {}
     };
 
     std::vector<Parameters> processes;

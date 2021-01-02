@@ -1,11 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "random_swap/random_swap.h"
-#include "2-opt/2-opt.h"
 #include "simulated_annealing/sa_and_2-opt.h"
-
-
 
 class Processors {
     static constexpr unsigned int NONE_MODE = -1;
@@ -13,7 +9,7 @@ class Processors {
     static constexpr unsigned int SWAP_MODE = 1;
     static constexpr unsigned int SA_2OPT_MODE = 2;
 
-    using SAParams = SimulatedAnnealing::ParametersForSA;
+    using SAParams = SimulatedAnnealing::Parameters;
     struct Parameters {
         unsigned int mode;
         unsigned int ms_time_limit;

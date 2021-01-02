@@ -8,6 +8,7 @@
    [x] simulated annealing           *
    [x] optuna                        *
                                * * * */
+
 /*
  * -- optunaについて
  * 焼き鈍しの温度関数に経過時間を使っている以上、乱数の初期化シードを固定しても出力結果は一定にならない。
@@ -24,7 +25,10 @@
  * -- 焼き鈍しのbest_nodesのメモについて
  * 焼き鈍しの思想としてはメモは不必要というか作らなくても良いようなパラメータを探せと言われてしまうかもしれないけど
  * メモした方が安定するからメモします。
-* */
+ *
+ * -- *processorについて
+ * 雛形を作った方がいい気がする
+ * */
 
 // default                                     : 2.64764e+05
 // simple_preprocessing                        : 1.56876e+05
@@ -64,7 +68,7 @@ int main(int argc, char *argv[]) {
     Preprocessors preprocessors = Preprocessors::yx_sort_preprocess() + Preprocessors::xy_sort_preprocess();
     preprocessors += Preprocessors::nearest_neighbor_preprocess();
 
-    SimulatedAnnealing::ParametersForSA params;
+    SimulatedAnnealing::Parameters params;
     params.ms_time_limit = 3000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
@@ -73,10 +77,16 @@ int main(int argc, char *argv[]) {
     processors = Processors::random_swap_process(1000) + Processors::two_opt_process(2000);
     processors += Processors::SA_two_opt_process(params);
 
+//    Postprocessors postprocessors = Postprocessors::bitDP_postprocess(10, 1);
+    Postprocessors postprocessors = Postprocessors::bitDP_postprocess(3, 1);
+    postprocessors += Postprocessors::bitDP_postprocess(5, 1);
+    postprocessors += Postprocessors::bitDP_postprocess(7, 1);
+    postprocessors += Postprocessors::bitDP_postprocess(10, 1);
+
     preprocessors.preprocessing(path, true);
     processors.processing(path, true);
+    postprocessors.postprocessing(path, true);
 
-    bitDP(path, 10, 1);
     finalize();
     sw.print_us();
     sw.print_ms();

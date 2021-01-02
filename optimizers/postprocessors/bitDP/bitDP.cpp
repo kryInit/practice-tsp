@@ -8,7 +8,7 @@ using namespace std;
 
 extern Vec2 cities_coord[CITY_NUM];
 
-void bitDP(int path[CITY_NUM], const int size, const int offset) {
+void bitDP(int path[CITY_NUM], const unsigned int size, const unsigned int offset) {
     using uint = unsigned int;
     const int N = (1<<size);
     int path_memo[CITY_NUM] = {};

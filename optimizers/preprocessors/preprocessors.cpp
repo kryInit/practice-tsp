@@ -1,5 +1,9 @@
 #include <iostream>
 #include "preprocessors.h"
+#include "nearest_neighbor/nearest_neighbor.h"
+#include "sort/xy_sort/xy_sort.h"
+#include "sort/yx_sort/yx_sort.h"
+
 using namespace std;
 
 Preprocessors::Preprocessors() : processes(std::vector<Parameters>()) {}
@@ -30,20 +34,20 @@ Preprocessors Preprocessors::yx_sort_preprocess() {
 }
 
 void Preprocessors::preprocessing(int path[CITY_NUM], bool do_log) {
-    if (do_log) cout << "main processing has started." << endl;
+    if (do_log) cout << "preprocessing has started." << endl;
     for(auto i : processes) {
         if (i.mode == NEAREST_NEIGHBOR_MODE) {
             double now_dist;
             if (do_log) {
                 now_dist = calc_total_dist(path);
                 cout << "\nnearest neighbor preprocess has started." << endl;
-                cout << "    | now dist           : " << now_dist << endl;
+                cout << "    | now dist              : " << now_dist << endl;
             }
             nearest_neighbor(path);
             if (do_log) {
                 double dist_ap = calc_total_dist(path);
                 cout << "    | dist after preprocess : " << dist_ap << endl;
-                cout << "    | variation          : " << dist_ap - now_dist << endl;
+                cout << "    | variation             : " << dist_ap - now_dist << endl;
                 cout << "nearest neighbor preprocess has finished.\n" << endl;
             }
         }
@@ -52,13 +56,13 @@ void Preprocessors::preprocessing(int path[CITY_NUM], bool do_log) {
             if (do_log) {
                 now_dist = calc_total_dist(path);
                 cout << "\nxy sort preprocess has started." << endl;
-                cout << "    | now dist           : " << now_dist << endl;
+                cout << "    | now dist              : " << now_dist << endl;
             }
             xy_sort(path);
             if (do_log) {
                 double dist_ap = calc_total_dist(path);
                 cout << "    | dist after preprocess : " << dist_ap << endl;
-                cout << "    | variation          : " << dist_ap - now_dist << endl;
+                cout << "    | variation             : " << dist_ap - now_dist << endl;
                 cout << "xy sort preprocess has finished.\n" << endl;
             }
         }
@@ -67,13 +71,13 @@ void Preprocessors::preprocessing(int path[CITY_NUM], bool do_log) {
             if (do_log) {
                 now_dist = calc_total_dist(path);
                 cout << "\nyx sort preprocess has started." << endl;
-                cout << "    | now dist           : " << now_dist << endl;
+                cout << "    | now dist              : " << now_dist << endl;
             }
             yx_sort(path);
             if (do_log) {
                 double dist_ap = calc_total_dist(path);
                 cout << "    | dist after preprocess : " << dist_ap << endl;
-                cout << "    | variation          : " << dist_ap - now_dist << endl;
+                cout << "    | variation             : " << dist_ap - now_dist << endl;
                 cout << "yx sort preprocess has finished.\n" << endl;
             }
         }

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "utility/utilities.h"
 #include "processors.h"
+#include "2-opt/2-opt.h"
+#include "random_swap/random_swap.h"
 using namespace std;
 
 Processors::Processors() : processes(std::vector<Parameters>()) {}

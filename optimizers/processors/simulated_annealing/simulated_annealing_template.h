@@ -18,14 +18,14 @@ protected:
     bool permit_continuation();
 
 public:
-    struct ParametersForSA {
+    struct Parameters {
         unsigned int ms_time_limit;
         unsigned int TEMP_RADIX;
         double PROBABILITY_COEF;
 
-        ParametersForSA() : ms_time_limit(0), TEMP_RADIX(1), PROBABILITY_COEF(1) {}
+        Parameters() : ms_time_limit(0), TEMP_RADIX(1), PROBABILITY_COEF(1) {}
     };
-    explicit SimulatedAnnealing(ParametersForSA params)
+    explicit SimulatedAnnealing(Parameters params)
         : ms_time_limit(params.ms_time_limit)
         , TEMP_RADIX(params.TEMP_RADIX)
         , PROBABILITY_COEF(params.PROBABILITY_COEF)
