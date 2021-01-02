@@ -1,3 +1,4 @@
 add_subdirectory(processors)
 add_subdirectory(preprocessors)
 add_subdirectory(postprocessors)
+add_library(optimizers optimizers.cpp)

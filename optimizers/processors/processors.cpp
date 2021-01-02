@@ -33,7 +33,7 @@ Processors Processors::SA_two_opt_process(SAParams sa_params) {
 }
 
 void Processors::processing(int path[CITY_NUM], bool do_log) {
-    if (do_log) cout << "main processing has started." << endl;
+    if (do_log) cout << "\nmain processing has started." << endl;
     for(auto i : processes) {
         if (i.mode == TWO_OPT_MODE) {
             double now_dist;
@@ -84,4 +84,5 @@ void Processors::processing(int path[CITY_NUM], bool do_log) {
             }
         }
     }
+    if (do_log) cout << "main processing has finished.\n" << endl;
 }

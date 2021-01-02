@@ -65,27 +65,19 @@ int main(int argc, char *argv[]) {
     stopwatch sw; sw.start();
     initialize();
 
-    Preprocessors preprocessors = Preprocessors::yx_sort_preprocess() + Preprocessors::xy_sort_preprocess();
-    preprocessors += Preprocessors::nearest_neighbor_preprocess();
-
     SimulatedAnnealing::Parameters params;
     params.ms_time_limit = 3000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
 
-    Processors processors;
-    processors = Processors::random_swap_process(1000) + Processors::two_opt_process(2000);
-    processors += Processors::SA_two_opt_process(params);
+    Preprocessors preprocessors = Preprocessors::nearest_neighbor_preprocess();
+    Processors processors = Processors::SA_two_opt_process(params);
+    Postprocessors postprocessors = Postprocessors::bitDP_postprocess(10, 1);
 
-//    Postprocessors postprocessors = Postprocessors::bitDP_postprocess(10, 1);
-    Postprocessors postprocessors = Postprocessors::bitDP_postprocess(3, 1);
-    postprocessors += Postprocessors::bitDP_postprocess(5, 1);
-    postprocessors += Postprocessors::bitDP_postprocess(7, 1);
-    postprocessors += Postprocessors::bitDP_postprocess(10, 1);
-
-    preprocessors.preprocessing(path, true);
-    processors.processing(path, true);
-    postprocessors.postprocessing(path, true);
+    bool do_log = true;
+//    Optimizer optimizer(preprocessors, processors, postprocessors);
+    Optimizer optimizer = Optimizer::default_optimizer();
+    optimizer.optimize(path, do_log);
 
     finalize();
     sw.print_us();

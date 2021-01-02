@@ -15,7 +15,7 @@ add_subdirectory(utility)
 add_subdirectory(optimizers)
 
 add_executable(route_builder simple_tsp.cpp)
-target_link_libraries(route_builder xor_shift utility processors preprocessors postprocessors)
+target_link_libraries(route_builder xor_shift utility optimizers processors preprocessors postprocessors)
 
 #[[
 set_target_properties( route_builder

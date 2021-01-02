@@ -23,7 +23,7 @@ Postprocessors Postprocessors::bitDP_postprocess(unsigned int size, unsigned int
 }
 
 void Postprocessors::postprocessing(int path[CITY_NUM], bool do_log) {
-    if (do_log) cout << "postprocessing has started." << endl;
+    if (do_log) cout << "\npostprocessing has started." << endl;
     for(auto i : processes) {
         if (i.mode == BITDP_MODE) {
             double now_dist;
@@ -41,5 +41,6 @@ void Postprocessors::postprocessing(int path[CITY_NUM], bool do_log) {
             }
         }
     }
+    if (do_log) cout << "postprocessing has finished.\n" << endl;
 }
 

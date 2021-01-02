@@ -34,7 +34,7 @@ Preprocessors Preprocessors::yx_sort_preprocess() {
 }
 
 void Preprocessors::preprocessing(int path[CITY_NUM], bool do_log) {
-    if (do_log) cout << "preprocessing has started." << endl;
+    if (do_log) cout << "\npreprocessing has started." << endl;
     for(auto i : processes) {
         if (i.mode == NEAREST_NEIGHBOR_MODE) {
             double now_dist;
@@ -82,4 +82,5 @@ void Preprocessors::preprocessing(int path[CITY_NUM], bool do_log) {
             }
         }
     }
+    if (do_log) cout << "preprocessing has finished.\n" << endl;
 }
