@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 #include "random/xor_shift.h"
 #include "time/time_manager.hpp"
-#include "swap.h"
+#include "random_swap.h"
 using namespace std;
 
 #define rep(i,n) for(int i=0; i<(n); ++i)
 
 extern Vec2 cities_coord[CITY_NUM];
 
-void swap(int path[CITY_NUM], const unsigned int ms_time_limit) {
+void random_swap(int path[CITY_NUM], const unsigned int ms_time_limit) {
     time_manager tm(ms_time_limit);
     int loop_count = 0;
     while(tm.is_within_time_limit()) {

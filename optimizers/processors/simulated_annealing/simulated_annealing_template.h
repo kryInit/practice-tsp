@@ -5,14 +5,6 @@
 #include "random/xor_shift.h"
 #include "time/time_manager.hpp"
 
-struct ParametersForSA {
-    unsigned int ms_time_limit;
-    unsigned int TEMP_RADIX;
-    double PROBABILITY_COEF;
-
-    ParametersForSA() : ms_time_limit(0), TEMP_RADIX(1), PROBABILITY_COEF(1) {}
-};
-
 class SimulatedAnnealing {
     const unsigned int ms_time_limit;
     const unsigned int TEMP_RADIX;
@@ -26,6 +18,13 @@ protected:
     bool permit_continuation();
 
 public:
+    struct ParametersForSA {
+        unsigned int ms_time_limit;
+        unsigned int TEMP_RADIX;
+        double PROBABILITY_COEF;
+
+        ParametersForSA() : ms_time_limit(0), TEMP_RADIX(1), PROBABILITY_COEF(1) {}
+    };
     explicit SimulatedAnnealing(ParametersForSA params)
         : ms_time_limit(params.ms_time_limit)
         , TEMP_RADIX(params.TEMP_RADIX)

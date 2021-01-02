@@ -62,13 +62,17 @@ int main(int argc, char *argv[]) {
     initialize();
 //    nearest_neighbor(path);
 //    xy_sort(path);
-//    swap(path, 3000);
-//    two_opt(path, 3000);
-    ParametersForSA params;
+
+    SimulatedAnnealing::ParametersForSA params;
     params.ms_time_limit = 3000;
     params.TEMP_RADIX = 233;
     params.PROBABILITY_COEF = 9.71e-5;
-    SA_TwoOpt(path, params).simulate(path);
+
+    Processors processors;
+    processors = Processors::random_swap_process(1000) + Processors::two_opt_process(2000);
+    processors += Processors::SA_two_opt_process(params);
+    processors.processing(path, true);
+
     bitDP(path, 10, 1);
     finalize();
     sw.print_us();
